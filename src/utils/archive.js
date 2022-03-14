@@ -1,7 +1,7 @@
 const fs = require("fs");
 
-async function moveFile(pathName, archivePath) {
-  fs.promises.rename(pathName, archivePath, (err) => {
+async function moveFile(currentFile, archiveDes) {
+  fs.promises.rename(currentFile, archiveDes, (err) => {
     if (err) {
       throw err;
     } else {

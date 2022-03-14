@@ -4,6 +4,7 @@ const { readFile } = require("./utils/file");
 const { mapByHeadings } = require("./utils/csv");
 const { saveUser, validateUser } = require("./utils/user");
 const { moveFile } = require("./utils/archive.js");
+const User = require("./models/User");
 
 // mongoose
 //   .connect("mongodb://localhost:27017/user-database", {
@@ -44,7 +45,7 @@ mongoose
     const app = express();
 
     try {
-      const archivePath = __dirname + "/data/archive";
+      const archivePath = __dirname + "/data/archive/users.csv";
       console.log(archivePath);
       const pathName = __dirname + "/data/users.csv";
       const contents = await readFile(pathName);
@@ -61,9 +62,16 @@ mongoose
           await saveUser(users[i]);
         }
       }
+
+      await moveFile(pathName, archivePath);
     } catch (err) {
       console.error(err);
     }
+
+    app.get("/", async (req, res) => {
+      const users = await User.find();
+      res.send(users);
+    });
 
     app.listen(3000, () => {
       console.log("Server has started!");
