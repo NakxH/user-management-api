@@ -1,9 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const { readFile } = require("./utils/file");
+const { readFile, moveFile } = require("./utils/file");
 const { mapByHeadings } = require("./utils/csv");
 const { saveUser, validateUser } = require("./utils/user");
-const { moveFile } = require("./utils/archive.js");
 const User = require("./models/User");
 
 // mongoose
