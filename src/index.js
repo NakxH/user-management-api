@@ -45,7 +45,7 @@ mongoose
     const app = express();
 
     try {
-      const archivePath = __dirname + "/data/archive/users.csv";
+      const archivePath = __dirname + "/archive/users.csv";
       console.log(archivePath);
       const pathName = __dirname + "/data/users.csv";
       const contents = await readFile(pathName);
